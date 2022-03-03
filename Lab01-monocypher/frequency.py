@@ -23,4 +23,4 @@ if __name__ == "__main__":
         charDistribution = frequency(sys.argv[1])
 
         for letter in charDistribution:
-            print(letter+": "+dict(charDistribution[letter]))
+            print(letter+": "+str(charDistribution[letter]))
