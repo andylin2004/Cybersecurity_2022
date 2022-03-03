@@ -52,20 +52,21 @@ def decode(fileName: str):
         lineResult = ""
         for char in line:
             if char.isalpha():
+                isUpper = char.isupper()
                 char = char.upper()
                 if isBestReversed:
                     if ord(char) - bestRotBy < 65:
-                        lineResult += chr(90 - (65 - (ord(char) - bestRotBy)))
+                        char = chr(90 - (65 - (ord(char) - bestRotBy)))
                     else:
-                        lineResult += chr(90 - (ord(char)-bestRotBy))
-                    # x
+                        char = chr(90 - (ord(char)-bestRotBy))
                 else:
                     if ord(char) + bestRotBy >= 90:
-                        lineResult += chr(65 + (ord(char) + bestRotBy - 90))
+                        char = chr(65 + (ord(char) + bestRotBy - 90))
                     else:
-                        lineResult += chr(ord(char)+bestRotBy+1)
-            else:
-                lineResult += char
+                        char = chr(ord(char)+bestRotBy+1)
+                if not isUpper:
+                    char = char.lower()
+            lineResult += char
 
         result += lineResult + "\n"
 
