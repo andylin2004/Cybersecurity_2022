@@ -17,4 +17,7 @@ if __name__ == "__main__":
         file1Freq = frequency(sys.argv[1])
         file2Freq = frequency(sys.argv[2])
 
+        # file1Freq = {"a": 0.2, "b": 0.2, "c": 0.2, "d": 0.2}
+        # file2Freq = {"a": 0.2, "b": 0.25, "c": 0.06, "d": 0.29}
+
         print(distance(file1Freq, file2Freq))
