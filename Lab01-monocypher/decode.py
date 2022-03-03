@@ -5,7 +5,7 @@ from frequency import frequency
 from distance import distance
 
 def decode(fileName: str):
-    lowDistance = 2
+    lowDistance = 2.0
     base = frequency("alice.txt")
     frequencyInput = frequency(fileName)
     isBestReversed = False
@@ -13,7 +13,7 @@ def decode(fileName: str):
     result = ""
     temp = frequencyInput[chr(65)]
 
-    for i in range(26):
+    for i in range(27):
         for v in range(65, 90):
             anotherTemp = frequencyInput[chr(v+1)]
             frequencyInput[chr(v+1)] = temp
@@ -21,8 +21,9 @@ def decode(fileName: str):
 
         frequencyInput[chr(65)] = temp
 
-        if lowDistance > distance(base, frequencyInput):
-            lowDistance = distance(base, frequencyInput)
+        candidate = distance(base, frequencyInput)
+        if lowDistance > candidate:
+            lowDistance = candidate
             isBestReversed = False
             bestRotBy = i
 
@@ -33,7 +34,7 @@ def decode(fileName: str):
         frequencyInput[chr(65+i)] = frequencyInput[chr(90-i)]
         frequencyInput[chr(90-i)] = temp
 
-    for i in range(26):
+    for i in range(27):
         for v in range(65, 90):
             anotherTemp = frequencyInput[chr(v+1)]
             frequencyInput[chr(v+1)] = temp
@@ -57,11 +58,12 @@ def decode(fileName: str):
                         lineResult += chr(90 - (65 - (ord(char) - bestRotBy)))
                     else:
                         lineResult += chr(90 - (ord(char)-bestRotBy))
+                    # x
                 else:
-                    if ord(char) + bestRotBy > 90:
+                    if ord(char) + bestRotBy >= 90:
                         lineResult += chr(65 + (ord(char) + bestRotBy - 90))
                     else:
-                        lineResult += chr(ord(char)+bestRotBy)
+                        lineResult += chr(ord(char)+bestRotBy+1)
             else:
                 lineResult += char
 
