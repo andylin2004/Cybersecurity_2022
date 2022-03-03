@@ -16,6 +16,9 @@ def frequency(fileName: str):
                 charDistribution[char] += 1
                 total += 1
     
+    for letter in charDistribution:
+        charDistribution[letter] /= total
+        
     return charDistribution
 
 if __name__ == "__main__":
