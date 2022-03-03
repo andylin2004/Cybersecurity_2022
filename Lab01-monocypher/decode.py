@@ -54,6 +54,8 @@ def decode(fileName: str):
                         lineResult += chr(65 + (ord(char) + bestRotBy-90))
                     else:
                         lineResult += chr(65+bestRotBy)
+            else:
+                lineResult += char
 
             result += lineResult
             lineResult = ""
