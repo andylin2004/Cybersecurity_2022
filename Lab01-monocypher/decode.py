@@ -70,6 +70,7 @@ def decode(fileName: str):
 
         result += lineResult + "\n"
 
+    result = result.strip()
     return result
 
 
