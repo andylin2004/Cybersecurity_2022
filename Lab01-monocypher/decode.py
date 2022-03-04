@@ -68,7 +68,7 @@ def decode(fileName: str):
                     char = char.lower()
             lineResult += char
 
-        result += lineResult + "\n"
+        result += lineResult
 
     result = result.strip()
     return result
