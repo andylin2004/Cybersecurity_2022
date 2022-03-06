@@ -13,7 +13,8 @@ def decode(fileName: str):
     result = ""
     temp = frequencyInput[chr(65)]
 
-    for i in range(27):
+    # cycle through all 26 reversed permutations here
+    for i in range(26):
         for v in range(65, 90):
             anotherTemp = frequencyInput[chr(v+1)]
             frequencyInput[chr(v+1)] = temp
@@ -27,6 +28,13 @@ def decode(fileName: str):
             isBestReversed = False
             bestRotBy = i
 
+    for v in range(65, 90):
+        anotherTemp = frequencyInput[chr(v+1)]
+        frequencyInput[chr(v+1)] = temp
+        temp = anotherTemp
+
+    frequencyInput[chr(65)] = temp
+
     # reverse ordering here
 
     for i in range(13):
@@ -34,6 +42,7 @@ def decode(fileName: str):
         frequencyInput[chr(65+i)] = frequencyInput[chr(90-i)]
         frequencyInput[chr(90-i)] = temp
 
+    # cycle through all 26 reversed permutations here
     for i in range(27):
         for v in range(65, 90):
             anotherTemp = frequencyInput[chr(v+1)]
@@ -42,33 +51,34 @@ def decode(fileName: str):
 
         frequencyInput[chr(65)] = temp
 
-        if lowDistance > distance(base, frequencyInput):
-            lowDistance = distance(base, frequencyInput)
+        candidate = distance(base, frequencyInput)
+        if lowDistance > candidate:
+            lowDistance = candidate
             isBestReversed = True
             bestRotBy = i
 
     file = open(fileName, "r")
     for line in file:
-        lineResult = ""
         for char in line:
             if char.isalpha():
+                # just to make my life sane, because I hate having to deal with lower and upper cases
                 isUpper = char.isupper()
                 char = char.upper()
                 if isBestReversed:
+                    # wrap over; we start from 90 because we are inversing things
                     if ord(char) - bestRotBy < 65:
                         char = chr(90 - (65 - (ord(char) - bestRotBy)))
                     else:
                         char = chr(90 - (ord(char)-bestRotBy))
                 else:
+                    # wrap over
                     if ord(char) + bestRotBy >= 90:
                         char = chr(65 + (ord(char) + bestRotBy - 90))
                     else:
                         char = chr(ord(char)+bestRotBy+1)
                 if not isUpper:
                     char = char.lower()
-            lineResult += char
-
-        result += lineResult
+            result += char
 
     result = result.strip()
     return result
