@@ -1,6 +1,7 @@
 #!/bin/python3
 
 import sys
+
 def shift(isDecode: bool, clearTextFile: str, keyFile: str):
     clearText = open(clearTextFile, "r").read().strip().upper()
     key = open(keyFile, "r").read().strip().upper()
@@ -18,7 +19,6 @@ def shift(isDecode: bool, clearTextFile: str, keyFile: str):
                 resultString += chr(90 - (64 - (ord(char) + curMod)))
             else:
                 resultString += chr(ord(char) + curMod)
-            print(curMod)
             counter += 1
 
     return resultString
