@@ -4,13 +4,12 @@ import sys
 from frequency import frequency
 from distance import distance
 
-def decode(fileName: str):
+def getRotationSpecs(fileName: str):
     lowDistance = 2.0
     base = frequency("alice.txt")
     frequencyInput = frequency(fileName)
     isBestReversed = False
     bestRotBy = 0
-    result = ""
     temp = frequencyInput[chr(65)]
 
     # cycle through all 26 reversed permutations here
@@ -56,6 +55,14 @@ def decode(fileName: str):
             lowDistance = candidate
             isBestReversed = True
             bestRotBy = i
+    
+    return {"isBestReversed": isBestReversed, "bestRotBy": bestRotBy, "distance": lowDistance}
+
+def decode(fileName: str):
+    rotationSpecs = getRotationSpecs(fileName)
+    isBestReversed = rotationSpecs["isBestReversed"]
+    bestRotBy = rotationSpecs["bestRotBy"]
+    result = ""
 
     file = open(fileName, "r")
     for line in file:
@@ -82,7 +89,6 @@ def decode(fileName: str):
 
     result = result.strip()
     return result
-
 
 if __name__ == "__main__":
     if len(sys.argv) >= 2:
