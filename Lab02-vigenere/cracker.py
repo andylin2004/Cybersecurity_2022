@@ -10,10 +10,24 @@ def guessKeyLength(fileName: str):
         distance = 0
         for _ in range(i):
             buckets.append("")
+
         for v in range(len(fileContent)):
             buckets[v%i]+= fileContent[v]
+
         for v in buckets:
+            print(v)
             distance += getRotationSpecs(v)["distance"]
+            print(decode(v))
+
+        distance /= i
+        
+        if distance < lowAvgDistance:
+            lowAvgDistance = distance
+            bestLength = i
+        
+        
+
+    print(bestLength)
 
 if __name__ == "__main__":
     guessKeyLength("crypt.txt")

@@ -78,3 +78,33 @@ def getRotationSpecs(inputString: str):
             bestRotBy = i
     
     return {"isBestReversed": isBestReversed, "bestRotBy": bestRotBy, "distance": lowDistance}
+
+def decode(inputString: str):
+    rotationSpecs = getRotationSpecs(inputString)
+    isBestReversed = rotationSpecs["isBestReversed"]
+    bestRotBy = rotationSpecs["bestRotBy"]
+    result = ""
+
+    for char in inputString:
+        if char.isalpha():
+            # just to make my life sane, because I hate having to deal with lower and upper cases
+            isUpper = char.isupper()
+            char = char.upper()
+            if isBestReversed:
+                # wrap over; we start from 90 because we are inversing things
+                if ord(char) - bestRotBy < 65:
+                    char = chr(90 - (65 - (ord(char) - bestRotBy)))
+                else:
+                    char = chr(90 - (ord(char)-bestRotBy))
+            else:
+                # wrap over
+                if ord(char) + bestRotBy >= 90:
+                    char = chr(65 + (ord(char) + bestRotBy - 90))
+                else:
+                    char = chr(ord(char)+bestRotBy+1)
+            if not isUpper:
+                char = char.lower()
+        result += char
+
+    result = result.strip()
+    return result
