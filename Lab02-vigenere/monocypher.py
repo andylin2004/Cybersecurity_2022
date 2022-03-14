@@ -27,7 +27,7 @@ def frequency(inputString: str):
 
 def getRotationSpecs(inputString: str):
     lowDistance = 2.0
-    base = frequency("alice.txt")
+    base = frequency(open("alice.txt").read())
     frequencyInput = frequency(inputString)
     isBestReversed = False
     bestRotBy = 0
@@ -85,6 +85,7 @@ def decode(inputString: str):
     bestRotBy = rotationSpecs["bestRotBy"]
     result = ""
 
+    print(bestRotBy)
     for char in inputString:
         if char.isalpha():
             # just to make my life sane, because I hate having to deal with lower and upper cases
