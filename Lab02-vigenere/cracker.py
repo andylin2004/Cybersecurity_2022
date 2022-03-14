@@ -18,7 +18,7 @@ def guessKeyLength(fileName: str, returnDecodedString: bool):
             bucket[v%i]+= fileContent[v]
 
         for v in bucket:
-            print(v)
+            # print(v)
             distance += getRotationSpecs(v)["distance"]
 
         distance /= i
