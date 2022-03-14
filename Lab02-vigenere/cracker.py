@@ -20,7 +20,7 @@ def guessKeyLength(fileName: str, returnDecodedString: bool):
         for v in bucket:
             print(v)
             distance += getRotationSpecs(v)["distance"]
-            print(decode(v))
+            # print(decode(v))
 
         distance /= i
         
@@ -30,17 +30,13 @@ def guessKeyLength(fileName: str, returnDecodedString: bool):
             bestBuckets = bucket
         
     if returnDecodedString:
-        for i in range(len(bucket)):
-            bucket[i] = decode(bucket[i])
+        for i in range(len(bestBuckets)):
+            bestBuckets[i] = decode(bestBuckets[i])
         
-        for i in range(len(bucket[0])):
-            textResult += bucket[0][i]
-            if i < len(bucket[1]):
-                textResult += bucket[1][i]
-            if i < len(bucket[2]):
-                textResult += bucket[2][i]
-            if i < len(bucket[3]):
-                textResult += bucket[3][i]
+        for i in range(len(bestBuckets[0])):
+            for v in range(len(bestBuckets)):
+                if i < len(bestBuckets[v]):
+                    textResult += bestBuckets[v][i]
         
         return textResult
 
