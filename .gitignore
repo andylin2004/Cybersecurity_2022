@@ -131,4 +131,4 @@ dmypy.json
 # macOS bad
 
 .DS_Store
-Lab03-/testfile01.txt
+*testfile*.txt
