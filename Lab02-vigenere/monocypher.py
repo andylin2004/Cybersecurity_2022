@@ -1,3 +1,5 @@
+#!/bin/python3
+
 from math import sqrt
 
 def distance(dict1: dict, dict2: dict):
