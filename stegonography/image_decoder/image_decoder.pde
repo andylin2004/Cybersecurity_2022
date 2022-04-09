@@ -23,8 +23,15 @@
      * You may use another loop or list if you need, but it can be done here.
      */
 
-
-
+    for (int i = 0; i<parts.size(); i += 4){
+      int result = 0;
+      for (int v = 0; v<4; v++){
+        int cPart = parts.get(i+v);
+        cPart = cPart << ((3-v)*2);
+        result += cPart;
+      }
+      ans += (char)result;
+    }
 
     return ans;
   }
@@ -45,7 +52,6 @@
       int green = (int)green(c);
       int blue = (int)blue(c);
 
-      /***********complete this section! **********/
       //pixels that have red and blue values that end in 000 have secret hidden in the green channel
        if(lastThree(red) && lastThree(blue)){
          //the last 2 bits of the green channel is 1/4 of a character
