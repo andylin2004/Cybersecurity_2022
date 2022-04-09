@@ -5,6 +5,10 @@
    return (value & 7) == 0;
   }
 
+  int getLastTwo(int value){
+   return value & 3;
+  }
+
   /**
   *Extract the message given a list of the parts of each character.
   *Every 4 values is one character.
@@ -43,14 +47,14 @@
 
       /***********complete this section! **********/
       //pixels that have red and blue values that end in 000 have secret hidden in the green channel
-      if( /*complete this boolean */){
-        //the last 2 bits of the green channel is 1/4 of a character
-        //extract the last 2 bits of the green channel and store in part of value
-        int partOfValue = /*complete this expression */;
-        //add a 0,1,2 or 3 to the list of all the secret values
-        data.add(partOfValue);
-        count++;
-      }
+       if(lastThree(red) && lastThree(blue)){
+         //the last 2 bits of the green channel is 1/4 of a character
+         //extract the last 2 bits of the green channel and store in part of value
+         int partOfValue = getLastTwo(green);
+         //add a 0,1,2 or 3 to the list of all the secret values
+         data.add(partOfValue);
+         count++;
+       }
 
     }
 
