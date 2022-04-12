@@ -1,13 +1,12 @@
 void setup(){
   size(1200,600);
-  PImage img1 = loadImage("data/cat.png");
-  PImage img2 = loadImage("data/modifiedCat.png");
+  PImage img1 = loadImage("data/space.png");
+  PImage img2 = loadImage("data/modifiedSpace.png");
   PImage diffImage = createImage(1200, 600, RGB);
   img1.loadPixels();
   img2.loadPixels();
   diffImage.loadPixels();
 
-  ArrayList<Integer> diffData = new ArrayList<Integer>();
   int numPixels = img1.width * img1.height;
 
   for (int i = 0; i<numPixels; i++){
