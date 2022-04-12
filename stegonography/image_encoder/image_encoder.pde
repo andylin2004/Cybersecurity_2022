@@ -16,7 +16,7 @@ int setLastThree(int secret, int original) {
 //for code that runs one time place all code in setup.
 void setup() {
     size(1200,600);
-    PImage img = loadImage("cat.png");
+    PImage img = loadImage("data/cat.png");
     println(img.width,img.height);//to check size for display purposes.
     img.loadPixels();
     
@@ -67,6 +67,6 @@ void setup() {
         }
 }
     img.updatePixels();
-    img.save("modifiedCat.png");
+    img.save("data/modifiedCat.png");
     
 }

@@ -38,7 +38,7 @@ String reassemble(ArrayList<Integer> parts) {
 //for code that runs one time place all code in setup.
 void setup() {
     size(1200,600);
-    PImage img = loadImage("modifiedCat.png");
+    PImage img = loadImage("data/modifiedCat.png");
     img.loadPixels();
     
     ArrayList<Integer> data = new ArrayList<Integer>();

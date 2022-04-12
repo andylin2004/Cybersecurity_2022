@@ -4,8 +4,8 @@ int getLastTwo(int value) {
 
 void setup(){
   size(1200,600);
-  PImage img1 = loadImage("cat.png");
-  PImage img2 = loadImage("modifiedCat.png");
+  PImage img1 = loadImage("data/cat.png");
+  PImage img2 = loadImage("data/modifiedCat.png");
   PImage diffImage = createImage(1200, 600, RGB);
   img1.loadPixels();
   img2.loadPixels();
