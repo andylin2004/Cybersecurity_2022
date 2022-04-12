@@ -18,16 +18,16 @@ void setup(){
     color img1C = img1.pixels[i];
     color img2C = img2.pixels[i];
 
-    int red = abs((int)red(img1C) - (int)red(img2C));
-    int green = abs((int)green(img1C) - (int)green(img2C));
-    int blue = abs((int)blue(img1C) - (int)blue(img2C));
-    
-    if (isGreenEncoded(green)){
-      diffImage.pixels[i] = color(153, 0, 255);
+    if (img1C == img2C){
+      diffImage.pixels[i] = color(255, 255, 255);
     }else{
-      diffImage.pixels[i] = color(red, green, blue);
-    }
-
+      int green = abs((int)green(img1C) - (int)green(img2C));
+      if (isGreenEncoded(green)){
+        diffImage.pixels[i] = color(0, 255, 0);
+      }else{
+        diffImage.pixels[i] = color(255, 0, 255);
+      }
+    } 
   }
 
   diffImage.updatePixels();
