@@ -55,7 +55,7 @@ void setup() {
         if (lastThree(red) && lastThree(blue)) {
             //the last 2 bits of the green channel is 1/4 of a character
             //extract the last 2 bits of the green channel and store in part of value
-            intpartOfValue = getLastTwo(green);
+            int partOfValue = getLastTwo(green);
             //add a 0,1,2 or 3 to the list of all the secret values
             data.add(partOfValue);
             count++;
