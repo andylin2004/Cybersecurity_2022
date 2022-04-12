@@ -1,6 +1,5 @@
-boolean isGreenEncoded(int value) {
-  int encodedNum = value & 3;
-  return encodedNum > 0 && encodedNum <= 3;
+int getLastTwo(int value) {
+  return value & 3;
 }
 
 void setup(){
@@ -22,10 +21,22 @@ void setup(){
       diffImage.pixels[i] = color(255, 255, 255);
     }else{
       int green = abs((int)green(img1C) - (int)green(img2C));
-      if (isGreenEncoded(green)){
-        diffImage.pixels[i] = color(0, 255, 0);
-      }else{
-        diffImage.pixels[i] = color(255, 0, 255);
+      switch(getLastTwo(green)){
+        case 0:
+         diffImage.pixels[i] = color(255, 0, 0);
+         break;
+        case 1:
+         diffImage.pixels[i] = color(0, 255, 0);
+         break;
+        case 2:
+         diffImage.pixels[i] = color(0, 0, 255);
+         break;
+        case 3:
+         diffImage.pixels[i] = color(231, 200, 146);
+         break;
+        default:
+         diffImage.pixels[i] = color(255, 0, 255);
+         break;
       }
     } 
   }
