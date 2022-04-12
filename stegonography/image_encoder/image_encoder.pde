@@ -67,6 +67,6 @@ void setup() {
         }
 }
     img.updatePixels();
-    img.save("data/modifiedCat.png");
+    img.save("modifiedCat.png");
     
 }
