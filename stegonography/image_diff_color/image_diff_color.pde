@@ -1,3 +1,7 @@
+int getLastTwo(int value) {
+  return value & 3;
+}
+
 void setup(){
   size(1200,600);
   PImage img1 = loadImage("data/space.png");
@@ -15,7 +19,7 @@ void setup(){
 
     int red = abs((int)red(img1C) - (int)red(img2C));
     int green = abs((int)green(img1C) - (int)green(img2C));
-    int blue = abs((int)blue(img1C) - (int)blue(img2C));
+    int blue = ((int)blue(img1C) - (int)blue(img2C));
 
     if (img1C != img2C){
       println("r" + red);
@@ -23,7 +27,11 @@ void setup(){
       println("b" + blue);
     }
 
-    diffImage.pixels[i] = color(red, green, blue);
+    if (blue != 0){
+      diffImage.pixels[i] = color(0, 0, 255);
+    }else{
+      diffImage.pixels[i] = color(0, 0, 0);
+    }
   }
 
   diffImage.updatePixels();
