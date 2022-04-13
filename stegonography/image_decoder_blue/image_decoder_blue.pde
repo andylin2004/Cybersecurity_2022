@@ -15,7 +15,7 @@ int getLast(int value) {
 *each character to an answer string.
 */
 PImage reassemble(ArrayList<Integer> parts) {
-    PImage result = createImage(600, 600, RGB);
+    PImage result = createImage(1200, 600, RGB);
     
     /**
     * loop through the parts list, and append the decoded characters to the ans String
