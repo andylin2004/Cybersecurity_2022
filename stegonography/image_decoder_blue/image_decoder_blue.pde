@@ -14,27 +14,24 @@ int getLast(int value) {
 *Loop over the list and assemble the characters, and append
 *each character to an answer string.
 */
-PImage reassemble(ArrayList<Integer> parts) {
-    PImage result = createImage(600, 600, RGB);
+String reassemble(ArrayList<Integer> parts) {
+    String result = "";
     
     /**
     * loop through the parts list, and append the decoded characters to the ans String
     * You may use another loop or list if you need, but it can be done here.
     */
     
-    for (int i = 0; i < parts.size(); i++) {
-        int[] array = new int[3];
-        for (int h = 0; h < 3; h++){
-          for (int v = 0; v < 8; v++) {
-            int cPart = parts.get(i*24 + v + h*8);
-            cPart = cPart << ((7 - v) * 2);
-            array[h] += cPart;
-          }
+    for (int i = 0; i < parts.size(); i += 24) {
+        int internalResult = 0;
+        for (int v = 0; v < 8; v++) {
+            int cPart = parts.get(i + v);
+            cPart = cPart << (7 - v);
+            internalResult += cPart;
         }
-        result.pixels[i] = color(array[0], array[1], array[2]);
+        result += (char)internalResult;
     }
-    
-    result.updatePixels();
+
     return result;
 }
 
@@ -66,5 +63,5 @@ void setup() {
         
     }
     
-    image(reassemble(data), 0, 0);
+    println(reassemble(data));
 }
