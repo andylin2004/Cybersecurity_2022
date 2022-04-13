@@ -27,7 +27,7 @@ PImage reassemble(ArrayList<Integer> parts) {
         for (int h = 0; h < 3; h++){
           for (int v = 0; v < 8; v++) {
             int cPart = parts.get(i*24 + v + h*8);
-            cPart = cPart << ((7 - v) * 2);
+            cPart = cPart << (7 - v);
             array[h] += cPart;
           }
         }
