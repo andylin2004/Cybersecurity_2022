@@ -4,8 +4,16 @@ boolean lastThree(int value) {
     return(value & 7) == 0;
 }
 
+boolean lastOne(int value){
+    return (value & 1) == 0;
+}
+
 int getLast(int value) {
     return value & 1;
+}
+
+int getLastTwo(int value) {
+    return value & 3;
 }
 
 /**
@@ -14,27 +22,24 @@ int getLast(int value) {
 *Loop over the list and assemble the characters, and append
 *each character to an answer string.
 */
-PImage reassemble(ArrayList<Integer> parts) {
-    PImage result = createImage(1200, 600, RGB);
+String reassemble(ArrayList<Integer> parts) {
+    String result = "";
     
     /**
     * loop through the parts list, and append the decoded characters to the ans String
     * You may use another loop or list if you need, but it can be done here.
     */
     
-    for (int i = 0; i < parts.size() / 24; i++) {
-        int[] array = new int[3];
-        for (int h = 0; h < 3; h++){
-          for (int v = 0; v < 8; v++) {
-            int cPart = parts.get(i*24 + v + h*8);
-            cPart = cPart << (7 - v);
-            array[h] += cPart;
-          }
+    for (int i = 0; i < parts.size(); i += 4) {
+        int internalResult = 0;
+        for (int v = 0; v < 4; v++) {
+            int cPart = parts.get(i + v);
+            cPart = cPart << ((3 - v) * 2);
+            internalResult += cPart;
         }
-        result.pixels[i] = color(array[0], array[1], array[2]);
+        result += (char)internalResult;
     }
-    
-    result.updatePixels();
+
     return result;
 }
 
@@ -49,22 +54,23 @@ void setup() {
     int numPixels = img.width * img.height;
     for (int i = 0; i < numPixels; i++) {
         //extract the numbers from the special pixels add them to an ArrayList
-        color c = img.pixels[i];
-        int red = (int)red(c);
-        int green = (int)green(c);
-        int blue = (int)blue(c);
+        color c1 = img.pixels[i];
+        //color c2 = img.pixels[i + numPixels / 2];
+        // int red = (int)red(c);
+        int green = (int)green(c1);
+        int blue = (int)blue(c1);
         
         //pixels that have red and blue values that end in 000 have secret hidden in the green channel
-        // if (lastThree(red) && lastThree(green)) {
+        if (lastThree(blue)) {
             //the last 2 bits of the green channel is 1/4 of a character
             //extract the last 2 bits of the green channel and store in part of value
-            int partOfValue = getLast(blue);
+            int partOfValue = getLastTwo(green);
             //add a 0,1,2 or 3 to the list of all the secret values
             data.add(partOfValue);
             count++;
-    // }
+        }
         
     }
     
-    image(reassemble(data), 0, 0);
+    println(reassemble(data));
 }
