@@ -20,6 +20,8 @@ def shift(isDecode: bool, clearTextFile: str, keyFile: str):
             else:
                 resultString += chr(ord(char) + curMod)
             counter += 1
+        else:
+            resultString += char
 
     return resultString
 
